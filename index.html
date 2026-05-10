@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mother's Day Card</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd1dc,#ff9eb5);
+  overflow:hidden;
+}
+
+.book{
+  position:relative;
+  width:350px;
+  height:450px;
+  perspective:2500px;
+}
+
+.page{
+  position:absolute;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  transform-origin:left;
+  transition:1.2s;
+  cursor:pointer;
+}
+
+.front,
+.back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* COVER */
+.cover{
+  background:linear-gradient(145deg,#ff4f81,#ff7fa4);
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.cover h1{
+  font-size:42px;
+}
+
+.cover p{
+  margin-top:15px;
+  font-size:18px;
+}
+
+.heart{
+  font-size:70px;
+  margin-bottom:20px;
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+  100%{transform:scale(1);}
+}
+
+/* MESSAGE */
+.message{
+  background:white;
+  padding:35px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+}
+
+.message h2{
+  color:#ff4f81;
+  margin-bottom:20px;
+}
+
+.message p{
+  color:#555;
+  line-height:1.7;
+  font-size:18px;
+}
+
+/* PHOTOS */
+.photos{
+  background:#fff0f5;
+  padding:20px;
+}
+
+.photos h2{
+  text-align:center;
+  color:#ff4f81;
+  margin-bottom:15px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.gallery img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:15px;
+  border:4px solid white;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  display:block;
+  background:#eee;
+}
+
+/* BACK */
+.back{
+  transform:rotateY(180deg);
+}
+
+/* STACK */
+.page1{ z-index:3; }
+.page2{ z-index:2; }
+.page3{ z-index:1; }
+
+/* FLIP ANIMATION */
+.book.open1 .page1{
+  transform:rotateY(-180deg);
+}
+
+.book.open2 .page2{
+  transform:rotateY(-180deg);
+}
+
+.book.open3 .page3{
+  transform:rotateY(-180deg);
+}
+</style>
+</head>
+
+<body>
+
+<div class="book" id="book">
+
+  <!-- PAGE 1 -->
+  <div class="page page1">
+    <div class="front cover">
+      <div class="heart">💖</div>
+      <h1>Happy<br>Mother's Day</h1>
+      <p>Click to Open</p>
+    </div>
+
+    <div class="back message">
+      <h2>Dear Mom,</h2>
+      <p>Thank you for your endless love, support, and care.</p>
+      <br>
+      <p>I’m lucky to have you.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page page2">
+    <div class="front message">
+      <h2>To The Best Mom 💐</h2>
+      <p>Thank you for every sacrifice, every lesson, and every smile.</p>
+      <br>
+      <p>I appreciate everything you do.</p>
+    </div>
+
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page page3">
+    <div class="front photos">
+      <h2>Captured Moments ❤️</h2>
+
+      <div class="gallery">
+       <img src="./images/grade1recog.jpg" alt="memory 1">
+        <img src="./images/g11recog.jfif" alt="memory 2">
+        <img src="./images/trio.jpg" alt="memory 3">
+        <img src="./images/ef.jpg" alt="memory 4">
+      </div>
+    </div>
+
+    <div class="back message">
+      <h2>Happy Mother's Day, Mama 🌸</h2>
+      <p>I love you so much, today and always.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const book = document.getElementById("book");
+let step = 0;
+
+book.addEventListener("click", () => {
+  step++;
+
+  if(step === 1){
+    book.classList.add("open1");
+  }
+  else if(step === 2){
+    book.classList.add("open2");
+  }
+  else if(step === 3){
+    book.classList.add("open3");
+  }
+  else{
+    book.classList.remove("open1","open2","open3");
+    step = 0;
+  }
+});
+</script>
+
+</body>
+</html>
